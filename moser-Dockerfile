@@ -1,0 +1,12 @@
+# 基础镜像选择 https://juejin.cn/post/7175883730140004407
+# from gcr.io/distroless/nodejs:16
+from node:16.17.0-bullseye-slim
+
+# moser文档 https://nomadas.gitbook.io/mongo-server/getting-started
+run npm install -g moser
+
+expose 3000
+
+# 变参数。https://www.runoob.com/docker/docker-dockerfile.html#:~:text=文件是 sh。-,ENTRYPOINT,-类似于 CMD
+ENTRYPOINT ["moser","-m"]
+CMD ["mongodb://0.0.0.0:27017"]

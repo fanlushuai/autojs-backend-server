@@ -1,0 +1,11 @@
+services:
+  tunnel:
+  # https://hub.docker.com/r/erisamoe/cloudflared
+# https://dash.cloudflare.com/login?redirect_uri=https%3A%2F%2Fone.dash.cloudflare.com%2F&state=f79bda36-3bf1-4099-bb6a-30a05854fd0d|https://one.dash.cloudflare.com/
+    image: erisamoe/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - autojs

@@ -1,0 +1,39 @@
+services:
+  moser:
+    image: moser
+    command: ["mongodb://ferretdb:27017"]
+    restart: on-failure
+    ports:
+      - 0.0.0.0:3000:3000
+    depends_on:
+      - ferretdb
+
+  ferretdb:
+    image: ghcr.io/ferretdb/ferretdb
+    restart: on-failure
+    ports:
+      - 27017:27017
+    environment:
+      - FERRETDB_POSTGRESQL_URL=postgres://auh:123@postgres:5432/ferretdb
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    restart: always
+    user: "999:999"
+    ports:
+      - 0.0.0.0:5432:5432
+    environment:
+      - POSTGRES_USER=auh
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=ferretdb
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
+  
+networks:
+  default:
+    name: autojs
