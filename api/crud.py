@@ -41,7 +41,7 @@ def list_device(db: Session):
 
 def list_valid_device(db: Session):
     return (
-        db.query(models.Device, models.Key)
+        db.query(models.Device)
         .join(models.Key, models.Device.key == models.Key.key, isouter=True)
         .filter(models.Key.expired_time > datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         .all()

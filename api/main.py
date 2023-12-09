@@ -8,7 +8,7 @@ import time, math, datetime
 import uuid
 import logging
 import os
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 print(os.getcwd())
 models.Base.metadata.create_all(bind=engine)
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 def load_schedule_or_create_blank():
     global Schedule
     try:
-        Schedule = BackgroundScheduler()
+        Schedule = AsyncIOScheduler()
         # 每10s，踢掉，不健康设备
         Schedule.start()
         Schedule.add_job(dropUnhealthDevice, trigger="interval", seconds=15)
@@ -110,7 +110,7 @@ def keepAlive(requestRole: schemas.requestRole, response_model=schemas.Rsp):
 
     validPass = False
     global deviceList
-    for devices in deviceList[0]:
+    for devices in deviceList:
         if str(devices.device_id) == deviceId:
             validPass = True
             break
