@@ -36,4 +36,4 @@ volumes:
   
 networks:
   default:
-    name: autojs
+    name: api

@@ -7,5 +7,7 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-    networks:
-      - autojs
+
+networks:
+  default:
+    name: api

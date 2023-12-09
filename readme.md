@@ -24,4 +24,4 @@ docker-compose -f mongo-compose.yml -f api-compose.yml up
 
 ## 内网穿透
 
-docker-compose -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml -e TUNNEL_TOKEN=xxxxxxxxxxxxxxxxx up
+docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml up
