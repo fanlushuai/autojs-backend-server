@@ -15,7 +15,7 @@ services:
   mysql:
     image: 'docker.io/mysql:latest'
     restart: always
-    container_name: mysql
+    container_name: fastapi-mysql
     volumes:
       - mysql:/var/lib/mysql  #挂载目录，持久化存储
     ports:
