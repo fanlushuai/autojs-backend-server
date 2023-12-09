@@ -1,20 +1,20 @@
-# Autojs 设备管理
+# autojs-backend-server
 
-1. 设备卡密验证
+1. 设备卡密生成及绑定
 
-2. 自动负载均衡
+2. 设备自动分组实现负载均衡
 
 # 使用
 
-构建镜像
+1. 构建镜像
 
-docker build -t fastapi -f Dockerfile .
+   docker build -t fastapi -f Dockerfile .
 
-启动实例
+2. 启动实例
 
-docker-compose -f docker-compose.yml up
+   docker-compose -f docker-compose.yml up
 
-查看api文档：
+3. 查看api文档：
 
-http://127.0.0.1:80/docs## autojs-backend-server
-# autojs-backend-server
+   http://127.0.0.1:80/docs## autojs-backend-server
+
