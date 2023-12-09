@@ -10,6 +10,14 @@ class Info(BaseModel):
         from_attributes = True
 
 
+class requestRole(BaseModel):
+    deviceId: str
+    role: str
+
+    class Config:
+        from_attributes = True
+
+
 class Rsp(BaseModel):
     status: str = "ok"
     code: str = "0000"

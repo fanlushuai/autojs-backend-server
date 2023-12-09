@@ -7,8 +7,8 @@ from .database import SessionLocal, engine
 import time, math, datetime
 import uuid
 import logging
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import os
+from apscheduler.schedulers.background import BackgroundScheduler
 
 print(os.getcwd())
 models.Base.metadata.create_all(bind=engine)
@@ -20,21 +20,20 @@ logger = logging.getLogger(__name__)
 def load_schedule_or_create_blank():
     global Schedule
     try:
-        Schedule = AsyncIOScheduler()
+        Schedule = BackgroundScheduler()
         # 每10s，踢掉，不健康设备
-        Schedule.add_job(dropUnhealthDevice, "interval", seconds=10)
-        # 每天，加载一次所有的有效设备
-        Schedule.add_job(loadAlldeviceId, "interval", day=1)
         Schedule.start()
-        logger.info("Created Schedule Object")
+        Schedule.add_job(dropUnhealthDevice, trigger="interval", seconds=15)
+        # 每天，加载一次所有的有效设备
+        Schedule.add_job(loadAlldeviceId, trigger="interval", days=1)
+        logger.info("创建定时任务")
     except:
-        logger.error("Unable to Create Schedule Object")
+        logger.error("创建定时任务 异常")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     load_schedule_or_create_blank()
-    logger.info("加载有效设备")
     loadAlldeviceId()
     yield
 
@@ -100,13 +99,18 @@ def all_group():
     return {"data": sorted(devices_active.items())}
 
 
-@app.post("/server/group")
-def keepAlive(deviceId: str, role: str, response_model=schemas.Rsp):
-    """客户端 保活"""
+@app.post("/device/keepAlive")
+def keepAlive(requestRole: schemas.requestRole, response_model=schemas.Rsp):
+    """客户端 保活
+
+    return 分组
+    """
+    deviceId = requestRole.deviceId
+    role = requestRole.role
 
     validPass = False
     global deviceList
-    for devices in deviceList:
+    for devices in deviceList[0]:
         if str(devices.device_id) == deviceId:
             validPass = True
             break
