@@ -1,0 +1,6 @@
+APScheduler==3.10.4
+fastapi==0.104.1
+pydantic==2.5.2
+SQLAlchemy==2.0.23
+mysql-connector-python==8.2.0
+uvicorn==0.24.0.post1
