@@ -18,9 +18,9 @@ class Key(Base):
 class Device(Base):
     __tablename__ = "t_device"
     id = Column(Integer, primary_key=True, index=True)
-    device_id = Column(String(100), index=True, unique=True)
-    key = Column(String(36), index=True, unique=True)
-    role = Column(String(20), index=True, unique=True)
-    group = Column(String(20), index=True, unique=True)
+    device_id = Column(String(100), index=True)
+    key = Column(String(36), index=True)
+    role = Column(String(20))
+    group = Column(String(20))
     time_updated = Column(DateTime(timezone=True), onupdate=func.now())
     time_created = Column(DateTime(timezone=True), server_default=func.now())
