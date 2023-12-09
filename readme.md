@@ -8,13 +8,20 @@
 
 1. 构建镜像
 
-   docker build -t fastapi -f Dockerfile .
+   docker build -t fastapi -f api-Dockerfile .
 
 2. 启动实例
 
-   docker-compose -f docker-compose.yml up
+   docker-compose -f api-compose.yml up
 
-3. 查看api文档：
+3. 查看 api 文档：
 
    http://127.0.0.1:80/docs## autojs-backend-server
 
+## 启动所有服务
+
+docker-compose -f mongo-compose.yml -f api-compose.yml up
+
+## 内网穿透
+
+docker-compose -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml -e TUNNEL_TOKEN=xxxxxxxxxxxxxxxxx up
