@@ -39,5 +39,10 @@ def list_device(db: Session):
     return db.query(models.Device).all()
 
 
-# def get_users(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.User).offset(skip).limit(limit).all()
+def list_valid_device(db: Session):
+    return (
+        db.query(models.Device, models.Key)
+        .join(models.Key, models.Device.key == models.Key.key, isouter=True)
+        .filter(models.Key.expired_time > datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        .all()
+    )

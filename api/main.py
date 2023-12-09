@@ -150,7 +150,7 @@ def loadAlldeviceId():
     global deviceList
     try:
         logger.info("加载有效设备数据到内存")
-        deviceList = crud.list_device(session)
+        deviceList = crud.list_valid_device(session)
     finally:
         session.close()
 
