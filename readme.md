@@ -20,6 +20,8 @@
 
 ## 启动所有服务
 
+docker build -t moser -f moser-Dockerfile .
+
 docker-compose -f mongo-compose.yml -f api-compose.yml up
 
 ## 内网穿透
