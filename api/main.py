@@ -93,7 +93,7 @@ def bind_key_device(info: schemas.Info, db: Session = Depends(get_db)):
     return {"data": "ok"}
 
 
-@app.post("/device/group")
+@app.get("/device/group")
 def all_group():
     """查看所有分组"""
     return {"data": sorted(devices_active.items())}
@@ -201,7 +201,7 @@ def reGroup():
     devices_count = len(devices_active)
     if devices_count <= group_max_num:
         logger.info("设备总数量太少，全部分为1组")
-        group_num = "#1"
+        group_num = "_1"
         for key in list(devices_active.keys()):
             devices_active[key]["group"] = group_num
         return devices_active
@@ -212,7 +212,7 @@ def reGroup():
     # 组编码
     group_num = []
     for num in range(1, group_count + 1):
-        group_num.append("#" + str(num))
+        group_num.append("_" + str(num))
 
     # 每一组发现者数量
     group_finder_min_count = int(finder_count / group_count)  # 向下取整,那么会导致多出来几个，发现者
@@ -262,7 +262,7 @@ def reGroup():
         # 组编码
         group_num = []
         for num in range(1, group_count + 1):
-            group_num.append("#" + str(num))
+            group_num.append("_" + str(num))
 
         group_num_getter_index = 0
         current_getter_count = 0
