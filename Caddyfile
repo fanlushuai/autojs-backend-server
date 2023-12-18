@@ -1,0 +1,28 @@
+{
+  http_port 6666
+  https_port 8888
+}
+
+api.yesyouget.art:6666 {
+  encode gzip 
+
+  reverse_proxy  /redRewards* moser:3000
+
+  reverse_proxy /key/* fastapi:80
+  reverse_proxy /device/* fastapi:80
+ }
+
+# 本地测试
+localhost:6666 {
+  encode gzip 
+  # data 路径的，全部请求到，mongo数据库   https://caddy.community/t/rewrite-to-another-domain-using-caddy-v2/17440
+  # 匹配器使用： https://caddyserver.com/docs/caddyfile/matchers
+  # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy 
+
+  reverse_proxy  /redRewards* moser:3000
+
+  reverse_proxy /key/* fastapi:80
+  reverse_proxy /device/* fastapi:80
+
+  # respond "Hello World!"
+}

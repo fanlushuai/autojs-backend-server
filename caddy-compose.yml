@@ -1,0 +1,25 @@
+version: "3.7"
+# https://hub.docker.com/_/caddy
+services:
+  caddy:
+    image: caddy:2.7
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "0.0.0.0:6666:6666"
+      - "0.0.0.0:8888:8888"
+      - "0.0.0.0:8888:8888/udp"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+    # external: true  Defining the data volume as external makes sure docker-compose down does not delete the volume. You may need to create it manually using docker volume create [project-name]_caddy_data.
+  caddy_config:
+
+networks:
+  default:
+    name: api
