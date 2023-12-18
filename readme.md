@@ -27,3 +27,7 @@ docker-compose -f mongo-compose.yml -f api-compose.yml up
 ## 内网穿透
 
 docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml up
+
+## caddy 整合服务入口
+
+docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml -f caddy-compose.yml up

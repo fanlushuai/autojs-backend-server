@@ -3,7 +3,7 @@
   https_port 8888
 }
 
-api.yesyouget.art:6666 {
+ks.yesyouget.art:6666 {
   encode gzip 
 
   reverse_proxy  /redRewards* moser:3000
