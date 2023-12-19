@@ -30,4 +30,4 @@ docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel
 
 ## caddy 整合服务入口
 
-docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml -f caddy-compose.yml up
+docker-compose --env-file .env -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f tunnel-compose.yml -f caddy-compose.yml up
