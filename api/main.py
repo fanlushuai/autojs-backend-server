@@ -195,7 +195,7 @@ def reGroup():
     if finder_count < 1:
         logger.info("没有发现者")
         for key in list(devices_active.keys()):
-            devices_active[key]["group"] = "no finder"
+            devices_active[key]["group"] = "_noFinder"
         return devices_active
 
     devices_count = len(devices_active)
