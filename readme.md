@@ -4,30 +4,61 @@
 
 2. 设备自动分组实现负载均衡
 
-# 使用
+## 基本架构
+
+```mermaid
+    graph LR
+    A[tunnel]--->B[caddy]
+
+    B[caddy]--->api[api]
+    api[api]--->mysql[mysql]
+
+    B[caddy]--->D[mongdb]
+    a(navicat)--->mysql[mysql]
+    a(navicat)--->D[mongdb]
+```
+
+api 服务：承担需要持久化的数据内容以及一些逻辑判断的功能。采用 fastapi+mysql 构建
+mongdb 服务：承担任意的数据结构。可丢弃。采用 moser+ferretdb+postgres 构建
+caddy 服务：服务统一，请求认证。
+tunnel 服务：内网穿透
+
+后台数据观察：用 navicat，连接 mongdb 和 mysql 即可。
+
+# api 服务
 
 1. 构建镜像
 
+```shell
    docker build -t fastapi -f api-Dockerfile .
+```
 
-2. 启动实例
+1. 启动实例
 
-   docker-compose -f api-compose.yml up
+```shell
+   docker-compose -f api-compose.yml -f mysql-compose.yml up
+```
 
-3. 查看 api 文档：
+2. 查看 api 文档：
 
    http://127.0.0.1:80/docs## autojs-backend-server
 
-## 启动所有服务
+## mongodb 服务
 
+```shell
 docker build -t moser -f moser-Dockerfile .
 
-docker-compose -f mongo-compose.yml -f api-compose.yml up
+docker-compose -f mongo-compose.yml up
+```
 
-## 内网穿透
+## 内网测试
 
-docker-compose --env-file .env -f mongo-compose.yml -f api-compose.yml -f tunnel-compose.yml up
+```shell
+docker-compose -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f caddy-compose.yml up
+```
 
-## caddy 整合服务入口
+## 外网测试
 
-docker-compose --env-file .env -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f tunnel-compose.yml -f caddy-compose.yml up
+```shell
+docker-compose --env-file .env -f tunnel-compose.yml up
+```
