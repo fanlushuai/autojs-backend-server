@@ -40,7 +40,7 @@
 
 2. 查看 api 文档：
 
-   http://127.0.0.1:80/docs## autojs-backend-server
+   http://127.0.0.1:80/docs
 
 ## mongodb 服务
 
