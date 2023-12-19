@@ -18,12 +18,11 @@
     a(navicat)--->D[mongdb]
 ```
 
-api 服务：承担需要持久化的数据内容以及一些逻辑判断的功能。采用 fastapi+mysql 构建
-mongdb 服务：承担任意的数据结构。可丢弃。采用 moser+ferretdb+postgres 构建
-caddy 服务：服务统一，请求认证。
-tunnel 服务：内网穿透
-
-后台数据观察：用 navicat，连接 mongdb 和 mysql 即可。
+- api 服务：承担需要持久化的数据内容以及一些逻辑判断的功能。采用 fastapi+mysql 构建
+- mongdb 服务：承担任意的数据结构。可丢弃。采用 moser+ferretdb+postgres 构建
+- caddy 服务：服务统一，请求认证。
+- tunnel 服务：内网穿透
+- 后台数据观察：用 navicat，连接 mongdb 和 mysql 即可。
 
 # api 服务
 
