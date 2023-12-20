@@ -11,11 +11,13 @@
     A[tunnel]--->B[caddy]
 
     B[caddy]--->api[api]
+    B[caddy]--->D[mongdb]
+
     api[api]--->mysql[mysql]
 
-    B[caddy]--->D[mongdb]
     a(navicat)--->mysql[mysql]
     a(navicat)--->D[mongdb]
+
 ```
 
 - api 服务：承担需要持久化的数据内容以及一些逻辑判断的功能。采用 fastapi+mysql 构建
