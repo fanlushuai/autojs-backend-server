@@ -21,10 +21,11 @@ localhost:6666 {
   # 匹配器使用： https://caddyserver.com/docs/caddyfile/matchers
   # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy 
 
+  respond /ping "PONG!!!"
+
   reverse_proxy  /redRewards* moser:3000
 
   reverse_proxy /key/* fastapi:80
   reverse_proxy /device/* fastapi:80
 
-  # respond "Hello World!"
 }
