@@ -6,6 +6,8 @@
 ks.yesyouget.art:6666 {
   encode gzip 
 
+  respond /ping "PONG!!!"
+  
   reverse_proxy  /redRewards* moser:3000
 
   reverse_proxy /key/* fastapi:80
