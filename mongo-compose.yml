@@ -12,7 +12,7 @@ services:
     image: ghcr.io/ferretdb/ferretdb
     restart: on-failure
     ports:
-      - 27017:27017
+      - 0.0.0.0:27017:27017
     environment:
       - FERRETDB_POSTGRESQL_URL=postgres://auh:123@postgres:5432/ferretdb
     depends_on:
