@@ -12,6 +12,11 @@ ks.yesyouget.art:6666 {
 
   reverse_proxy /key/* fastapi:80
   reverse_proxy /device/* fastapi:80
+
+  handle_path /script/update* {
+        root * /dist
+        file_server browse
+    }
  }
 
 # 本地测试
@@ -21,11 +26,11 @@ localhost:6666 {
   # 匹配器使用： https://caddyserver.com/docs/caddyfile/matchers
   # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy 
 
-  respond /ping "PONG!!!"
+  # respond /ping "PONG!!!"
 
   reverse_proxy  /redRewards* moser:3000
 
   reverse_proxy /key/* fastapi:80
   reverse_proxy /device/* fastapi:80
-
 }
+
