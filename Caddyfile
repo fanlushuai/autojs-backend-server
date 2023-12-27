@@ -15,7 +15,8 @@ ks.yesyouget.art:6666 {
 
   handle_path /script/update* {
         root * /dist
-        file_server browse
+        # file_server browse
+        file_server 
     }
  }
 
