@@ -20,6 +20,7 @@ ks.yesyouget.art:6666 {
     }
   @file_download path  /script/update* 
   header @file_download {
+	  cache-control max-age=0
   	Content-Type application/octet-stream
   	Content-Disposition `attachment; filename="{file}"`
   }
