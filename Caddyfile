@@ -3,7 +3,7 @@
   https_port 8888
 }
 
-ks.yesyouget.art:6666 {
+ks.yesyouget.art:6666 localhost:6666  {
   encode gzip 
 
   respond /ping "PONG!!!"
@@ -20,24 +20,9 @@ ks.yesyouget.art:6666 {
     }
   @file_download path  /script/update* 
   header @file_download {
-	  cache-control max-age=0
+	  Cache-Control max-age=0
   	Content-Type application/octet-stream
   	Content-Disposition `attachment; filename="{file}"`
   }
  }
-
-# 本地测试
-localhost:6666 {
-  encode gzip 
-  # data 路径的，全部请求到，mongo数据库   https://caddy.community/t/rewrite-to-another-domain-using-caddy-v2/17440
-  # 匹配器使用： https://caddyserver.com/docs/caddyfile/matchers
-  # https://caddyserver.com/docs/caddyfile/directives/reverse_proxy 
-
-  # respond /ping "PONG!!!"
-
-  reverse_proxy  /redRewards* moser:3000
-
-  reverse_proxy /key/* fastapi:80
-  reverse_proxy /device/* fastapi:80
-}
 
