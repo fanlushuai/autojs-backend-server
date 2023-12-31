@@ -17,7 +17,8 @@ services:
       - FERRETDB_POSTGRESQL_URL=postgres://auh:123@postgres:5432/ferretdb
     depends_on:
       - postgres
-
+    volumes:
+      - ferretdb:/state
   postgres:
     image: postgres
     restart: always
@@ -33,6 +34,7 @@ services:
 
 volumes:
   postgres:
+  ferretdb:
   
 networks:
   default:
