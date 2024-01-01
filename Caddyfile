@@ -7,7 +7,12 @@ ks.yesyouget.art:6666 localhost:6666  {
   encode gzip 
 
   respond /ping "PONG!!!"
-  
+   
+  route /help/* {
+      uri strip_prefix /help
+      reverse_proxy webdis:7379
+  }
+
   reverse_proxy  /redRewards* moser:3000
 
   reverse_proxy /key/* fastapi:80

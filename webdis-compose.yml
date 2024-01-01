@@ -4,14 +4,14 @@ services:
     command: /usr/local/bin/webdis /config/webdis.json
     volumes:  # mount volume containing the config file
       - ./:/config
-    networks:
-      - api
     depends_on:  # make sure Redis starts first, so that Webdis can connect to it without retries
       - redis
     ports:  # allow connections from the Docker host on localhost, port 7379
       - "0.0.0.0:7379:7379"
 
   redis:
-    image: redis:6.2.6
-    networks:
-      - api
+    image: redis:latest
+
+networks:
+  default:
+    name: api
