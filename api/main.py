@@ -195,10 +195,12 @@ def reGroup():
     if finder_count < 1:
         logger.info("没有发现者")
         for key in list(devices_active.keys()):
-            # devices_active[key]["group"] = "_noFinder"
-            devices_active[key][
-                "group"
-            ] = "_0"  # 如果大家还想要消费，单机模式的。其实单机模式就是finder。所以，不存在nofinder。
+            devices_active[key]["group"] = "_noFinder"
+            # devices_active[key][
+            #     "group"
+            # ] = "_0"  # 如果大家还想要消费，单机模式的。其实单机模式就是finder。所以，不存在nofinder。
+            # 内部客户端，遇到nofinder，直接走_0通道。
+            # 外部客户端，遇到nofinder，就gg
         return devices_active
 
     devices_count = len(devices_active)
