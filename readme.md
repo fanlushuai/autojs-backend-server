@@ -28,13 +28,7 @@
 
 # api 服务
 
-1. 构建镜像
-
-```shell
-   docker build -t fastapi -f api-Dockerfile .
-```
-
-1. 启动实例
+1. 构建镜像启动容器
 
 ```shell
    docker-compose -f api-compose.yml -f mysql-compose.yml up
@@ -43,14 +37,6 @@
 2. 查看 api 文档：
 
    http://127.0.0.1:80/docs
-
-## mongodb 服务
-
-```shell
-docker build -t moser -f moser-Dockerfile .
-
-docker-compose -f mongo-compose.yml up
-```
 
 ## 内网测试
 
@@ -61,5 +47,5 @@ docker-compose -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f c
 ## 外网测试
 
 ```shell
-docker-compose --env-file .env -f tunnel-compose.yml up
+docker-compose -f tunnel-compose.yml up
 ```
