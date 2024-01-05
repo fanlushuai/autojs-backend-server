@@ -1,8 +1,11 @@
 services:
   moser:
-    image: moser
+    build:
+      context: .
+      dockerfile: moser-Dockerfile
+    # image: moser
     command: ["mongodb://ferretdb:27017"]
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - 0.0.0.0:3000:3000
     depends_on:
@@ -10,7 +13,7 @@ services:
 
   ferretdb:
     image: ghcr.io/ferretdb/ferretdb
-    restart: on-failure
+    restart: always
     ports:
       - 0.0.0.0:27017:27017
     environment:
@@ -19,9 +22,10 @@ services:
       - postgres
     volumes:
       - ferretdb:/state
+
   postgres:
     image: postgres
-    restart: always
+    restart: unless-stopped
     user: "999:999"
     ports:
       - 0.0.0.0:5432:5432
@@ -35,7 +39,7 @@ services:
 volumes:
   postgres:
   ferretdb:
-  
+
 networks:
   default:
     name: api

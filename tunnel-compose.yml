@@ -7,7 +7,9 @@ services:
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-
+    env_file:
+      - .env
+      
 networks:
   default:
     name: api

@@ -2,6 +2,7 @@ services:
   webdis:
     image: nicolas/webdis:latest
     command: /usr/local/bin/webdis /config/webdis.json
+    restart: unless-stopped
     volumes:  # mount volume containing the config file
       - ./:/config
     depends_on:  # make sure Redis starts first, so that Webdis can connect to it without retries

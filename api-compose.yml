@@ -1,7 +1,10 @@
 # version: "3.9"
 services:
   fastapi:
-    image: fastapi
+    # image: fastapi
+    build:
+      context: .
+      dockerfile: api-Dockerfile
     restart: always
     ports:
       - 0.0.0.0:80:80
@@ -9,9 +12,9 @@ services:
       - CONNECTION=mysql+mysqlconnector://fls:fls@mysql:3306/test
     depends_on:
       mysql:
-        # condition: service_completed_successfully 
+        # condition: service_completed_successfully
         condition: service_healthy
-        
+
 networks:
   default:
     name: api
