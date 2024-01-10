@@ -15,7 +15,7 @@ ks.yesyouget.art:6666 localhost:6666  {
 
   reverse_proxy  /redRewards* moser:3000
 
-  reverse_proxy  /xiaoaitts* xiaoai:8848
+  reverse_proxy  /xiaoai/* xiaoaitts:8848
 
   reverse_proxy /key/* fastapi:80
   reverse_proxy /device/* fastapi:80
