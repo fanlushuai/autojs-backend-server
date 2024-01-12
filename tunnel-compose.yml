@@ -13,3 +13,4 @@ services:
 networks:
   default:
     name: api
+    external: true

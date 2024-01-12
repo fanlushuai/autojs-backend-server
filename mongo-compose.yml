@@ -43,3 +43,4 @@ volumes:
 networks:
   default:
     name: api
+    external: true
