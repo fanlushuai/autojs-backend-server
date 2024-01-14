@@ -10,3 +10,6 @@ CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "80"]
 
 # https://blog.51cto.com/u_16175473/7690694  传环境变量，注意参数的位置。
 # docker run -e CONNECTION="mysql+mysqlconnector://fls:fls@0.0.0.0:3306/test" --name fastapi -p 80:80 fastapi
+
+# 多阶段优化例子 https://www.reddit.com/r/FastAPI/comments/rrwglp/reduce_size_of_the_official_fastapi_image/
+# python的镜像分析 https://aws.amazon.com/cn/blogs/china/choose-the-best-docker-image-for-your-python-application/

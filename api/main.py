@@ -1,11 +1,10 @@
 from fastapi import Depends, FastAPI, Request, Response
 from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
-
+from . import base62
 from . import crud, models, schemas
 from .database import SessionLocal, engine
-import time, math, datetime
-import uuid
+import time, math
 import logging
 import os
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -73,7 +72,8 @@ def gen_key(count: int, unit: str, db: Session = Depends(get_db)):
     else:
         return "errot param path"
 
-    key = crud.create_key(db, str(uuid.uuid1()), endtimeSec)
+    # key = crud.create_key(db, str(uuid.uuid1()), endtimeSec)
+    key = crud.create_key(db, base62.genCode(), endtimeSec)
     return {"data": key.key}
 
 
