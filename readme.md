@@ -51,11 +51,17 @@
 ## 内网测试
 
 ```shell
-docker-compose -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f caddy-compose.yml up
+# 如果启动xiaoaitts的话，需要这个配置。小米账号密码。
+echo "User=xxx\nPwd=xx" >>.env
+
+docker-compose -f mongo-compose.yml -f mysql-compose.yml -f api-compose.yml -f caddy-compose.yml  -f webdis-compose.yml -f xiaoaitts-compose.yml up -d
 ```
 
 ## 外网测试
 
 ```shell
+# 如何需要内网穿透的话，需要配置这个。
+echo "TUNNEL_TOKEN=eyJhIjxxxxx" >>.env
+
 docker-compose -f tunnel-compose.yml up
 ```

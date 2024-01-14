@@ -1,0 +1,12 @@
+services:
+  xiaoaitts:
+    image: fanlushuai/xiaoai-tts-http:v1
+    restart: unless-stopped
+    ports:
+      - 0.0.0.0:8848:8848
+    env_file:
+      - .env
+
+networks:
+  default:
+    name: api
