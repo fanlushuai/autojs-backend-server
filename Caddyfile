@@ -8,8 +8,7 @@ ks.yesyouget.art:6666 localhost:6666  {
 
   respond /ping "PONG!!!"
    
-  route /webdis/* {
-      uri strip_prefix /webdis
+  handle_path /webdis/* {
       reverse_proxy webdis:7379
   }
 
